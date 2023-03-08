@@ -1,50 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
     <head>
         <meta charset="UTF-8">
         <title>Learning Vue</title>
         <script src="https://unpkg.com/vue@3"></script>
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                display: grid;
-                place-items: center;
-            }
-
-            .text-red {
-                color: red;
-            }
-
-            .text-green {
-                color: green;
-            }
-        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
+    <body class="h-full grid place-items-center">
         <div id="app">
-            <button :class="buttonClasses" @click="toggle">Click Me</button>
+            <section v-show="inProgressHomework.length">
+                <h2 class="font-bold mb-2">In progress</h2>
+
+                <ul>
+
+                    <li
+                            v-for="assignment in inProgressHomework"
+                            :key="assignment.name">
+                        <label>
+                            {{ assignment.name }}
+
+                            <input v-model="assignment.complete" type="checkbox">
+                        </label>
+                    </li>
+                </ul>
+            </section>
+
+            <section v-show="completedHomework.length">
+                <h2 class="font-bold mt-8">Complete Homework</h2>
+
+                <ul>
+
+                    <li
+                            v-for="assignment in completedHomework"
+                            :key="assignment.name">
+                        <label>
+                            {{ assignment.name }}
+
+                            <input v-model="assignment.complete" type="checkbox">
+                        </label>
+                    </li>
+                </ul>
+            </section>
         </div>
         <script>
-            Vue.createApp({
+            let app = {
                 data() {
                     return {
-                        buttonClasses: "text-green"
-                    };
+                        homework: [
+                            { name: 'Finish Project' , complete: false },
+                            { name: 'Read a book' , complete: true },
+                            { name: 'Learn Vue 3' , complete: false },
+                        ]
+                    }
                 },
 
-                methods: {
-                    toggle() {
-                        if (this.buttonClasses === "text-green"){
-                            return this.buttonClasses = "text-red";
-                        }
+                computed: {
+                    completedHomework() {
+                        return this.homework.filter(a => a.complete)
+                    },
 
-                        return this.buttonClasses = "text-green"
+                    inProgressHomework() {
+                        return this.homework.filter(a => ! a.complete)
                     }
                 }
-            }).mount('#app');
+            }
+            Vue.createApp(app).mount('#app');
         </script>
     </body>
 </html>
