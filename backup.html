@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+    <head>
+        <meta charset="UTF-8">
+        <title>Learning Vue</title>
+        <script src="https://unpkg.com/vue@3"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="h-full grid place-items-center">
+        <div id="app">
+            <section v-show="inProgressHomework.length">
+                <h2 class="font-bold mb-2">In progress</h2>
+
+                <ul>
+
+                    <li
+                            v-for="assignment in inProgressHomework"
+                            :key="assignment.name">
+                        <label>
+                            {{ assignment.name }}
+
+                            <input v-model="assignment.complete" type="checkbox">
+                        </label>
+                    </li>
+                </ul>
+            </section>
+
+            <section v-show="completedHomework.length">
+                <h2 class="font-bold mt-8">Complete Homework</h2>
+
+                <ul>
+
+                    <li
+                            v-for="assignment in completedHomework"
+                            :key="assignment.name">
+                        <label>
+                            {{ assignment.name }}
+
+                            <input v-model="assignment.complete" type="checkbox">
+                        </label>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <script>
+            let app = {
+                data() {
+                    return {
+                        homework: [
+                            { name: 'Finish Project' , complete: false },
+                            { name: 'Read a book' , complete: true },
+                            { name: 'Learn Vue 3' , complete: false },
+                        ]
+                    }
+                },
+
+                computed: {
+                    completedHomework() {
+                        return this.homework.filter(a => a.complete)
+                    },
+
+                    inProgressHomework() {
+                        return this.homework.filter(a => ! a.complete)
+                    }
+                }
+            }
+            Vue.createApp(app).mount('#app');
+        </script>
+    </body>
+</html>
