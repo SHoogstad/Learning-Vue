@@ -4,26 +4,45 @@
         <meta charset="UTF-8">
         <title>Learning Vue</title>
         <script src="https://unpkg.com/vue@3"></script>
+        <style>
+            html, body {
+                height: 100%;
+            }
+
+            body {
+                display: grid;
+                place-items: center;
+            }
+
+            .text-red {
+                color: red;
+            }
+
+            .text-green {
+                color: green;
+            }
+        </style>
     </head>
     <body>
         <div id="app">
-            <p>
-                <input type="text" v-model="greeting">
-            </p>
-            <p> {{ greeting }} ({{ greeting.length}}) </p>
+            <button :class="buttonClasses" @click="toggle">Click Me</button>
         </div>
         <script>
             Vue.createApp({
                 data() {
                     return {
-                        greeting: 'Hello World'
-                    }
+                        buttonClasses: "text-green"
+                    };
                 },
 
-                mounted() {
-                    setTimeout(() => {
-                        this.greeting = 'this message was set using mounted'
-                    }, 3000)
+                methods: {
+                    toggle() {
+                        if (this.buttonClasses === "text-green"){
+                            return this.buttonClasses = "text-red";
+                        }
+
+                        return this.buttonClasses = "text-green"
+                    }
                 }
             }).mount('#app');
         </script>
