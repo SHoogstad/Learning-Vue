@@ -1,5 +1,6 @@
 import AssignmentList from "./AssignmentList.js";
 import AppButton from "./AppButton.js";
+import AssignmentCreate from "./AssignmentCreate.js";
 export default {
     template: `
         <section class="space-y-6">
@@ -11,32 +12,19 @@ export default {
                 :assignments="completedHomework"
                 title="Completed"
             ></assignmentList>
+            <assignmentCreate @add="add"></assignmentCreate>
         </section>
-        
-        <form @submit.prevent="add" class="m-4"> 
-            <input 
-                v-model="newAssignment"
-                class="text-black p-2" 
-                id="new-assigment" 
-                name="new-assignment"
-                placeholder="new assignment"
-                required
-            >
-            <app-button> add </app-button>
-        </form>
     `,
 
-    components: { AssignmentList, AppButton },
+    components: { AssignmentList, AppButton, AssignmentCreate },
 
     data() {
         return {
             homework: [
                 { name: 'Finish Project' , complete: false, id: 1 },
                 { name: 'Read a book' , complete: false, id: 2 },
-                { name: 'Learn Vue 3' , complete: false ,id: 3 },
+                { name: 'Learn Vue 3' , complete: false , id: 3 },
             ],
-
-            newAssignment: '',
         }
     },
 
@@ -51,14 +39,12 @@ export default {
     },
 
     methods: {
-        add() {
+        add(name) {
             this.homework.push({
-                name: this.newAssignment,
+                name: name,
                 complete: false,
                 id: this.homework.length + 1
             });
-
-            this.newAssignment = '';
         }
     }
 }
