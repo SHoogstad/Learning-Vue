@@ -3,8 +3,8 @@ export default {
         <button 
             :class="{
                 'border rounded px-5 py-2 disabled:cursor-not-allowed': true,
-                'bg-red-200 hover:bg-gray-400': type === 'primary',
-                'bg-blue-200 hover:bg-gray-400': type === 'secondary',
+                'bg-blue-800 hover:bg-gray-400': type === 'primary',
+                'bg-red-200 hover:bg-gray-400': type === 'secondary',
                 'bg-gray-200 hover:bg-gray-400': type === 'muted',
                 'is-loading': processing
             }"

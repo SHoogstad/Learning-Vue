@@ -8,7 +8,7 @@ export default {
             <ul>
                 <Assignment 
                     v-for="assignment in assignments"
-                    :key="assignment.name"
+                    :key="assignment.id"
                     :assignment="assignment"
                 ></Assignment>
             </ul>
