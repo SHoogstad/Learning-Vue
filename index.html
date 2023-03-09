@@ -8,21 +8,17 @@
     </head>
     <body class="h-full grid place-items-center">
         <div id="app">
-            <app-button></app-button>
+            <app-button>submit</app-button>
         </div>
-        <script>
+        <script type="module">
+
+            import AppButton from "./js/components/AppButton.js";
+
             let app = {
                 components: {
-                    'app-button': {
-                        template: `
-                        <button class="bg-gray">test</button>
-                        `,
-                        mounted() {
-                            alert('button alert')
-                        },
-                    }
+                    'app-button': AppButton
                 },
-            }
+            };
             Vue.createApp(app).mount('#app');
         </script>
     </body>
