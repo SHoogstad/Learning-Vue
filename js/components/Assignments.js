@@ -30,12 +30,7 @@ export default {
 
     data() {
         return {
-            homework: [
-                { name: 'Finish Project' , complete: false,tag: 'Project', id: 1 },
-                { name: 'Read a book' , complete: false, tag: 'Dutch', id: 2 },
-                { name: 'Read a book v2' , complete: false, tag: 'Dutch', id: 3 },
-                { name: 'Learn Vue 3' , complete: false , tag: 'Programming', id: 4 },
-            ],
+            homework: [],
             currentTag: '',
         }
     },
@@ -64,6 +59,13 @@ export default {
         tags() {
             return new Set(this.homework.map(a => a.tag).filter(a => a))
         },
+    },
+    created() {
+        fetch('http://localhost:3000/assignments')
+            .then(response => response.json())
+            .then(data => {
+                this.homework = data
+            })
     },
 
     methods: {
