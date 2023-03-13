@@ -6,6 +6,7 @@ export default {
                 'bg-blue-800 hover:bg-gray-400': type === 'primary',
                 'bg-red-800' : type === 'secondary',
                 'bg-gray-200 hover:bg-gray-400': type === 'muted',
+                'bg-gray-800 hover:bg-gray-400': type === 'toggle',
                 'is-loading': processing
             }"
             :disabled="processing"
